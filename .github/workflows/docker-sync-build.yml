@@ -25,14 +25,17 @@ jobs:
         with:
           fetch-depth: 0  # pour récupérer l’historique complet
 
+      # Modern, maintained fork sync action (see https://github.com/tgymnich/fork-sync)
       - name: Sync with upstream
-        uses: aormsby/Fork-Sync-With-Upstream-action@v1.3
+        uses: tgymnich/fork-sync@v1.8
         with:
-          upstream_repository: ${{ env.UPSTREAM_REPO }}
-          upstream_branch: ${{ env.UPSTREAM_BRANCH }}
-          target_branch: main
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          owner: ikawrakow
+          repo: ik_llama.cpp
+          base: main
+          head: main
           auto_merge: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build:
     runs-on: ubuntu-latest
